@@ -1,0 +1,11 @@
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Debug\Assembly-CSharp.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Debug\Mono.Cecil.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Debug\ScrollsModLoader.Interfaces.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Debug\UnityEngine.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Debug\PlayerInfo.mod.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Debug\PlayerInfo.mod.pdb
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\obj\Debug\PlayerInfo.mod.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\obj\Debug\PlayerInfo.mod.pdb
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Debug\JsonFx.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Debug\Microsoft.CSharp.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Debug\System.dll

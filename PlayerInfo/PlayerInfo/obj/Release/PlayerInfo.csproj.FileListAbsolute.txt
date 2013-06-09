@@ -1,0 +1,13 @@
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\PlayerInfo.mod.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\PlayerInfo.mod.pdb
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\Assembly-CSharp.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\JsonFx.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\Microsoft.CSharp.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\Mono.Cecil.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\ScrollsModLoader.Interfaces.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\System.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\UnityEngine.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.mod.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.mod.pdb
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\JsonExSerializer.dll
+D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.csprojResolveAssemblyReference.cache
