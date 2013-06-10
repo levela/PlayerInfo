@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PlayerInfo</RootNamespace>
     <AssemblyName>PlayerInfo.mod</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,8 +34,9 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\Assemblies\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="JsonExSerializer">
-      <HintPath>..\..\..\Assemblies\JsonExSerializer.dll</HintPath>
+    <Reference Include="JsonFx, Version=2.0.1106.2515, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Assemblies\JsonFx.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>..\..\..\Assemblies\Mono.Cecil.dll</HintPath>
@@ -58,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiResultMessage.cs" />
+    <Compile Include="JsonMessageSplitter.cs" />
     <Compile Include="PlayerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

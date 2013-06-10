@@ -6,9 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
-using JsonExSerializer;
+using JsonFx.Json;
 
 namespace PlayerInfo
 {
@@ -28,7 +27,6 @@ namespace PlayerInfo
             {
                 Console.WriteLine(e);
             }
-
         }
 
         ~PlayerInfo()
@@ -73,13 +71,13 @@ namespace PlayerInfo
                     String html = new WebClient().DownloadString("http://a.scrollsguide.com/player?name=kbasten&fields=all&d");
                     log.WriteLine(html);
 
-                    Serializer s = new Serializer(typeof(ApiResultMessage));
+                    JsonReader reader = new JsonReader();
+                    Message message = reader.Read(html, System.Type.GetType("ApiResultMessage")) as ApiResultMessage;
 
-                    ApiResultMessage arm = (ApiResultMessage)s.Deserialize(html);
-
-                    log.WriteLine(arm.msg);
-                    
-
+                    ApiResultMessage armsg = (ApiResultMessage)message;
+                    log.WriteLine("Name: " + armsg.data.name);
+                    log.WriteLine("Rank: " + armsg.data.rank);
+                    log.WriteLine("Rating: " + armsg.data.rating);
                 //}
             }
 
