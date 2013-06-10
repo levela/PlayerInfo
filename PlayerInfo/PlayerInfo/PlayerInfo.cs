@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Reflection;
 
 using JsonFx.Json;
 
@@ -14,22 +15,21 @@ namespace PlayerInfo
     public class PlayerInfo : BaseMod
     {
 
+        private BattleMode bm = null; // battlemode used for sending the chat
         private StreamWriter log;
+
+        public static Boolean loaded = false;
 
         public PlayerInfo()
         {
-            try
-            {
-                log = File.CreateText("PlayerInfo.log");
-                log.AutoFlush = true;
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine(e);
-            }
         }
 
         ~PlayerInfo()
+        {
+            closeLog();
+        }
+
+        private void closeLog()
         {
             log.Flush();
             log.Close();
@@ -39,46 +39,102 @@ namespace PlayerInfo
         {
             return "PlayerInfo";
         }
+
         public override int GetVersion()
         {
             return 1;
         }
+
         public override MethodDefinition[] GetHooks(TypeDefinitionCollection scrollsTypes, int version)
         {
-            return new MethodDefinition[] { scrollsTypes["BattleMode"].Methods.GetMethod("handleMessage", new Type[]{typeof(Message)}) };
+            return new MethodDefinition[] { 
+                    // hook handleMessage in battlemode for the GameInfo message for getting the opponent name
+                    scrollsTypes["BattleMode"].Methods.GetMethod("handleMessage", new Type[]{typeof(Message)}),
+                    // hook addListener in Communicator to obtain instance of BattleMode
+                    scrollsTypes["Communicator"].Methods.GetMethod("addListener", new Type[]{typeof(ICommListener)})
+            };
         }
 
         public override void Init()
         {
+            if (!PlayerInfo.loaded)
+            {
+                try
+                {
+                    log = File.CreateText("PlayerInfo.log");
+                    log.AutoFlush = true;
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine(e);
+                }
+
+                Console.WriteLine("Loaded mod PlayerInfo");
+
+                PlayerInfo.loaded = true;
+            }
         }
 
         public override bool BeforeInvoke(InvocationInfo info, out object returnValue)
         {
-            Message m = (Message)info.Arguments()[0];
-
-            if (m is GameInfoMessage)
+            // we can obtain the BattleMode instance from this call
+            if (info.TargetMethod().Equals("addListener"))
             {
-                GameInfoMessage gm = (GameInfoMessage)m;
-                log.WriteLine(gm.ToString());
+                if (info.Arguments()[0] is BattleMode)
+                {
+                    bm = (BattleMode)info.Arguments()[0];
+                }
+            }
+            else if (bm != null && info.TargetMethod().Equals("handleMessage")) // no need to try without a battlemode instance for chat
+            {
+                Message m = (Message)info.Arguments()[0];
 
-                //if (new GameType(gm.gameType).isMultiplayer())
-               // {
-                    log.WriteLine("Current color: " + gm.color);
+                if (m is GameInfoMessage)
+                {
+                    GameInfoMessage gm = (GameInfoMessage)m;
 
-                    String opponentName = getOpponentName(gm);
-                    log.WriteLine("Battling against: " + opponentName);
+                    if (new GameType(gm.gameType).isMultiplayer()) // just multiplayer matches
+                    {
+                        log.WriteLine("Current color: " + gm.color);
 
-                    String html = new WebClient().DownloadString("http://a.scrollsguide.com/player?name=kbasten&fields=all&d");
-                    log.WriteLine(html);
+                        String opponentName = getOpponentName(gm);
+                        log.WriteLine("Battling against: " + opponentName);
 
-                    JsonReader reader = new JsonReader();
-                    Message message = reader.Read(html, System.Type.GetType("ApiResultMessage")) as ApiResultMessage;
+                        // now use the api to get the player's data
+                        String html = new WebClient().DownloadString("http://a.scrollsguide.com/player?fields=all&name=" + opponentName);
+                        log.WriteLine(html);
 
-                    ApiResultMessage armsg = (ApiResultMessage)message;
-                    log.WriteLine("Name: " + armsg.data.name);
-                    log.WriteLine("Rank: " + armsg.data.rank);
-                    log.WriteLine("Rating: " + armsg.data.rating);
-                //}
+                        // convert the html data to ApiResultMessage
+                        JsonReader reader = new JsonReader();
+                        Message message = reader.Read(html, System.Type.GetType("ApiResultMessage")) as ApiResultMessage;
+
+                        ApiResultMessage armsg = (ApiResultMessage)message;
+
+                        String chatMsg = "";
+                        if (armsg.msg.Equals("success")) // api call succeeded
+                        {
+                            chatMsg += "Player info: " + armsg.data.name + "\n";
+                            chatMsg += "Rank: " + armsg.data.rank + "\n";
+                            chatMsg += "Rating: " + armsg.data.rating + "\n";
+                            chatMsg += "Games played: " + armsg.data.played + "\n";
+                            chatMsg += "Games won: " + armsg.data.won + "\n";
+                        }
+                        else
+                        {
+                            chatMsg = "Couldn't get data for " + opponentName + ".";
+                        }
+                        MethodInfo mi = typeof(BattleMode).GetMethod("updateChat", BindingFlags.NonPublic | BindingFlags.Instance);
+
+                        if (mi != null)
+                        { // send chat message
+                            mi.Invoke(bm, new String[] { chatMsg });
+                        }
+                        else
+                        {
+                            log.WriteLine("Can't invoke updateChat");
+                        }
+                    }
+                }
             }
 
             returnValue = null;

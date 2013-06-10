@@ -3,7 +3,7 @@
     public class ApiResultMessage : Message
     {
         public DataFieldDeserializer data;
-        public String msg;
+        public new String msg;
         public int time;
     }
 
