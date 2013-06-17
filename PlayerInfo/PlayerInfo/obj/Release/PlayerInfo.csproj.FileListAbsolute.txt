@@ -9,3 +9,10 @@ D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\UnityEngine
 D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.mod.dll
 D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.mod.pdb
 D:\Projects\ScrollsMods\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.csprojResolveAssemblyReference.cache
+C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.csprojResolveAssemblyReference.cache
+C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.mod.dll
+C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.mod.pdb
+C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\PlayerInfo.mod.dll
+C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\PlayerInfo.mod.pdb
+C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\ScrollsModLoader.Interfaces.dll
+C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\System.dll

@@ -16,36 +16,23 @@ namespace PlayerInfo
     {
 
         private BattleMode bm = null; // battlemode used for sending the chat
-        private StreamWriter log;
-
-        public static Boolean loaded = false;
 
         public PlayerInfo()
         {
+            Console.WriteLine("Loaded mod PlayerInfo");
         }
 
-        ~PlayerInfo()
-        {
-            closeLog();
-        }
-
-        private void closeLog()
-        {
-            log.Flush();
-            log.Close();
-        }
-
-        public override string GetName()
+        public static string GetName()
         {
             return "PlayerInfo";
         }
 
-        public override int GetVersion()
+        public static int GetVersion()
         {
             return 1;
         }
 
-        public override MethodDefinition[] GetHooks(TypeDefinitionCollection scrollsTypes, int version)
+        public static MethodDefinition[] GetHooks(TypeDefinitionCollection scrollsTypes, int version)
         {
             return new MethodDefinition[] { 
                     // hook handleMessage in battlemode for the GameInfo message for getting the opponent name
@@ -55,39 +42,19 @@ namespace PlayerInfo
             };
         }
 
-        public override void Init()
-        {
-            if (!PlayerInfo.loaded)
-            {
-                try
-                {
-                    log = File.CreateText("PlayerInfo.log");
-                    log.AutoFlush = true;
-                }
-                catch (IOException e)
-                {
-                    Console.WriteLine(e);
-                }
-
-                Console.WriteLine("Loaded mod PlayerInfo");
-
-                PlayerInfo.loaded = true;
-            }
-        }
-
         public override bool BeforeInvoke(InvocationInfo info, out object returnValue)
         {
             // we can obtain the BattleMode instance from this call
-            if (info.TargetMethod().Equals("addListener"))
+            if (info.targetMethod.Equals("addListener"))
             {
-                if (info.Arguments()[0] is BattleMode)
+                if (info.arguments[0] is BattleMode)
                 {
-                    bm = (BattleMode)info.Arguments()[0];
+                    bm = (BattleMode)info.arguments[0];
                 }
             }
-            else if (bm != null && info.TargetMethod().Equals("handleMessage")) // no need to try without a battlemode instance for chat
+            else if (bm != null && info.targetMethod.Equals("handleMessage")) // no need to try without a battlemode instance for chat
             {
-                Message m = (Message)info.Arguments()[0];
+                Message m = (Message)info.arguments[0];
 
                 if (m is GameInfoMessage)
                 {
@@ -95,14 +62,10 @@ namespace PlayerInfo
 
                     if (new GameType(gm.gameType).isMultiplayer()) // just multiplayer matches
                     {
-                        log.WriteLine("Current color: " + gm.color);
-
                         String opponentName = getOpponentName(gm);
-                        log.WriteLine("Battling against: " + opponentName);
 
                         // now use the api to get the player's data
                         String html = new WebClient().DownloadString("http://a.scrollsguide.com/player?fields=all&name=" + opponentName);
-                        log.WriteLine(html);
 
                         // convert the html data to ApiResultMessage
                         JsonReader reader = new JsonReader();
@@ -117,7 +80,7 @@ namespace PlayerInfo
                             chatMsg += "Rank: " + armsg.data.rank + "\n";
                             chatMsg += "Rating: " + armsg.data.rating + "\n";
                             chatMsg += "Games played: " + armsg.data.played + "\n";
-                            chatMsg += "Games won: " + armsg.data.won + "\n";
+                            chatMsg += "Games won: " + armsg.data.won + " (" + Math.Round(((float)armsg.data.won / (float)armsg.data.played) * 100) + "%)\n";
                         }
                         else
                         {
@@ -125,13 +88,12 @@ namespace PlayerInfo
                         }
                         MethodInfo mi = typeof(BattleMode).GetMethod("updateChat", BindingFlags.NonPublic | BindingFlags.Instance);
 
-                        if (mi != null)
-                        { // send chat message
+                        if (mi != null) // send chat message
+                        {
                             mi.Invoke(bm, new String[] { chatMsg });
                         }
-                        else
+                        else // can't invoke updateChat
                         {
-                            log.WriteLine("Can't invoke updateChat");
                         }
                     }
                 }

@@ -41,16 +41,14 @@
     <Reference Include="Mono.Cecil">
       <HintPath>..\..\..\Assemblies\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="ScrollsModLoader.Interfaces">
-      <HintPath>..\..\..\Assemblies\ScrollsModLoader.Interfaces.dll</HintPath>
+    <Reference Include="ScrollsModLoader.Interfaces, Version=1.0.4906.25305, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\AppData\ScrollsModLoader.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
     </Reference>
     <Reference Include="System.XML" />
@@ -66,8 +64,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetDir)PlayerInfo.mod.dll C:\Users\Gamepc\AppData\Local\Mojang\Scrolls\game\Scrolls_Data\Managed\ModLoader\mods\PlayerInfo\PlayerInfo.mod.dll
-del C:\Users\Gamepc\ApData\Local\Mojang\Scrolls\game\Scrolls_Data\Managed\ModLoader\mods.ini</PostBuildEvent>
+    <PostBuildEvent>copy $(TargetDir)PlayerInfo.mod.dll C:\Users\kbasten\AppData\Local\Mojang\Scrolls\game\Scrolls_Data\Managed\ModLoader\mods\PlayerInfo\PlayerInfo.mod.dll
+del C:\Users\kbasten\AppData\Local\Mojang\Scrolls\game\Scrolls_Data\Managed\ModLoader\mods.ini</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
