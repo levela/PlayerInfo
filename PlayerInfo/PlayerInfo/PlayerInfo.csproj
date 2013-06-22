@@ -51,6 +51,7 @@
     <Reference Include="System.Core">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\Assemblies\UnityEngine.dll</HintPath>
