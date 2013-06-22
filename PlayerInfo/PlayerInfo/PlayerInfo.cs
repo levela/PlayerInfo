@@ -34,12 +34,14 @@ namespace PlayerInfo
 
         public static MethodDefinition[] GetHooks(TypeDefinitionCollection scrollsTypes, int version)
         {
-			if (version != 94)
-				return new MethodDefinition[] { };
-            return new MethodDefinition[] { 
+            try {
+				return new MethodDefinition[] { 
                     // hook handleMessage in battlemode for the GameInfo message for getting the opponent name
                     scrollsTypes["BattleMode"].Methods.GetMethod("handleMessage", new Type[]{typeof(Message)}),
-            };
+            	};
+			} catch {
+				return new MethodDefinition[] { };
+			}
         }
 
         public override bool BeforeInvoke(InvocationInfo info, out object returnValue)
