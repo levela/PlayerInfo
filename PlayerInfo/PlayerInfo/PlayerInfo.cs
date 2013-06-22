@@ -34,26 +34,20 @@ namespace PlayerInfo
 
         public static MethodDefinition[] GetHooks(TypeDefinitionCollection scrollsTypes, int version)
         {
+			if (version != 94)
+				return new MethodDefinition[] { };
             return new MethodDefinition[] { 
                     // hook handleMessage in battlemode for the GameInfo message for getting the opponent name
                     scrollsTypes["BattleMode"].Methods.GetMethod("handleMessage", new Type[]{typeof(Message)}),
-                    // hook addListener in Communicator to obtain instance of BattleMode
-                    scrollsTypes["Communicator"].Methods.GetMethod("addListener", new Type[]{typeof(ICommListener)})
             };
         }
 
         public override bool BeforeInvoke(InvocationInfo info, out object returnValue)
         {
             // we can obtain the BattleMode instance from this call
-            if (info.targetMethod.Equals("addListener"))
+            if (info.targetMethod.Equals("handleMessage"))
             {
-                if (info.arguments[0] is BattleMode)
-                {
-                    bm = (BattleMode)info.arguments[0];
-                }
-            }
-            else if (bm != null && info.targetMethod.Equals("handleMessage")) // no need to try without a battlemode instance for chat
-            {
+				bm = (BattleMode)info.target;
                 Message m = (Message)info.arguments[0];
 
                 if (m is GameInfoMessage)
