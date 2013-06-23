@@ -63,10 +63,15 @@
     <Compile Include="PlayerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WebClientTimeOut.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetDir)PlayerInfo.mod.dll C:\Users\kbasten\AppData\Local\Mojang\Scrolls\game\Scrolls_Data\Managed\ModLoader\mods\PlayerInfo\PlayerInfo.mod.dll
-del C:\Users\kbasten\AppData\Local\Mojang\Scrolls\game\Scrolls_Data\Managed\ModLoader\mods.ini</PostBuildEvent>
+    <PostBuildEvent>copy $(TargetDir)PlayerInfo.mod.dll C:\Users\Gamepc\AppData\Local\Mojang\Scrolls\game\Scrolls_Data\Managed\ModLoader\mods\PlayerInfo\PlayerInfo.mod.dll
+del C:\Users\Gamepc\AppData\Local\Mojang\Scrolls\game\Scrolls_Data\Managed\ModLoader\mods.ini</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
