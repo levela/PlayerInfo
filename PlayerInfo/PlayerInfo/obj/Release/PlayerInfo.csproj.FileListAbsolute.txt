@@ -16,3 +16,14 @@ C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\P
 C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\PlayerInfo.mod.pdb
 C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\ScrollsModLoader.Interfaces.dll
 C:\Users\kbasten\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\System.dll
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\PlayerInfo.mod.dll
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\PlayerInfo.mod.pdb
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\Assembly-CSharp.dll
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\JsonFx.dll
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\Mono.Cecil.dll
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\ScrollsModLoader.Interfaces.dll
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\System.dll
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\bin\Release\UnityEngine.dll
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.csprojResolveAssemblyReference.cache
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.mod.dll
+C:\Users\Levela\Documents\GitHub\PlayerInfo\PlayerInfo\PlayerInfo\obj\Release\PlayerInfo.mod.pdb

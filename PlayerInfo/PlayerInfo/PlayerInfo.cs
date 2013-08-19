@@ -29,7 +29,7 @@ namespace PlayerInfo
 
 		public static int GetVersion()
 		{
-			return 1;
+			return 2; //Increased version number
 		}
 
 		public static MethodDefinition[] GetHooks(TypeDefinitionCollection scrollsTypes, int version)
@@ -47,7 +47,7 @@ namespace PlayerInfo
 			}
 		}
 
-		public override bool BeforeInvoke(InvocationInfo info, out object returnValue)
+		public override void BeforeInvoke(InvocationInfo info)
 		{
 			// we can obtain the BattleMode instance from this call
 			if (info.targetMethod.Equals("handleMessage"))
@@ -85,14 +85,13 @@ namespace PlayerInfo
 				}
 			}
 
-			returnValue = null;
-			return false;
+            return;
 		}
 
-		public override void AfterInvoke(InvocationInfo info, ref object returnValue)
-		{
-			return;
-		}
+        public override void AfterInvoke(InvocationInfo info, ref object returnValue)
+        {
+            return;
+        }
 
 		private String getOpponentName(GameInfoMessage gm)
 		{
@@ -108,6 +107,7 @@ namespace PlayerInfo
 			ApiResultMessage armsg = (ApiResultMessage)message;
 
 			String chatMsg = "";
+
 			if (armsg.msg.Equals("success")) // api call succeeded
 			{
 				chatMsg += "Player info: " + armsg.data.name + "\n";
@@ -116,16 +116,19 @@ namespace PlayerInfo
 				chatMsg += "Games played: " + armsg.data.played + "\n";
 				chatMsg += "Games won: " + armsg.data.won + " (" + Math.Round(((float)armsg.data.won / (float)armsg.data.played) * 100) + "%)\n";
 			}
+
 			else
 			{
 				chatMsg = "Couldn't get data for " + oppName + ".";
 			}
+
 			MethodInfo mi = typeof(BattleMode).GetMethod("updateChat", BindingFlags.NonPublic | BindingFlags.Instance);
 
 			if (mi != null) // send chat message
 			{
 				mi.Invoke(bm, new String[] { chatMsg });
 			}
+
 			else // can't invoke updateChat
 			{
 			}
